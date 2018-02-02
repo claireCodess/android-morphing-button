@@ -8,30 +8,30 @@
               android:gravity="center"
               tools:context=".Sample4Activity">
 
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/mb_height_56">
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/mb_height_56">
 
-        <com.dd.morphingbutton.impl.IndeterminateProgressButton
-                android:id="@+id/btnMorph1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/mb_white"
-                android:layout_gravity="center"/>
-    </FrameLayout>
+		<com.dd.morphingbutton.impl.IndeterminateProgressButton
+			android:id="@+id/btnMorph1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/mb_white"
+			android:layout_gravity="center"/>
+	</FrameLayout>
 
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/mb_height_56"
-            android:layout_marginTop="16dp">
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/mb_height_56"
+		android:layout_marginTop="16dp">
 
-        <com.dd.morphingbutton.impl.IndeterminateProgressButton
-                android:id="@+id/btnMorph2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/mb_white"
-                android:layout_gravity="center"/>
+		<com.dd.morphingbutton.impl.IndeterminateProgressButton
+			android:id="@+id/btnMorph2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/mb_white"
+			android:layout_gravity="center"/>
 
-    </FrameLayout>
+	</FrameLayout>
 
 </LinearLayout>

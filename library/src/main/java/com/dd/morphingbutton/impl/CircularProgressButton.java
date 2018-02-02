@@ -62,25 +62,25 @@ public class CircularProgressButton extends MorphingButton {
 		super.morph(params);
 	}
 
-	public void morphToProgress(int backgroundColor, int shapeRadius, float strokeWidth, int padding,
-	                            int width, int height, int duration, @NonNull @ColorInt int... progressColors) {
+	public void morphToProgress(int backgroundColor, int shapeRadius, float strokeWidth,
+	                            int padding, int width, int height, int duration,
+	                            @NonNull @ColorInt int... progressColors) {
 		mStrokeWidth = strokeWidth;
 		mPadding = padding;
 		if (progressColors.length > 0) {
 			mProgressColors = progressColors;
 		}
 
-		Params circle =
-				Params.create().duration(duration).cornerRadius(shapeRadius).width(width)
-						.height(height).color(backgroundColor).colorPressed(backgroundColor)
-						.animationListener(new MorphingAnimation.Listener() {
+		Params circle = Params.create().duration(duration).cornerRadius(shapeRadius).width(width)
+				.height(height).color(backgroundColor).colorPressed(backgroundColor)
+				.animationListener(new MorphingAnimation.Listener() {
 
-							@Override
-							public void onAnimationEnd() {
-								mIsRunning = true;
-								invalidate();
-							}
-						});
+					@Override
+					public void onAnimationEnd() {
+						mIsRunning = true;
+						invalidate();
+					}
+				});
 		morph(circle);
 	}
 

@@ -8,17 +8,17 @@
               android:gravity="center"
               tools:context=".Sample1Activity">
 
-    <com.dd.morphingbutton.MorphingButton
-            android:id="@+id/btnMorph1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/mb_white"/>
+	<com.dd.morphingbutton.MorphingButton
+		android:id="@+id/btnMorph1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@color/mb_white"/>
 
-    <com.dd.morphingbutton.MorphingButton
-            android:id="@+id/btnMorph2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/mb_white"
-            android:layout_marginTop="16dp"/>
+	<com.dd.morphingbutton.MorphingButton
+		android:id="@+id/btnMorph2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@color/mb_white"
+		android:layout_marginTop="16dp"/>
 
 </LinearLayout>
