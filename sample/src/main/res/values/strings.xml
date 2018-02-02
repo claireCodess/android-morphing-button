@@ -9,6 +9,7 @@
         <item>Morphing Button - Icon &amp; Text</item>
         <item>Linear Progress Button - Determinate</item>
         <item>Linear Progress Button - Indeterminate</item>
+        <item>Circular Progress Button - Indeterminate</item>
     </string-array>
 
 </resources>
