@@ -5,7 +5,7 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     public int dimen(@DimenRes int resId) {
         return (int) getResources().getDimension(resId);

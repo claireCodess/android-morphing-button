@@ -117,6 +117,7 @@ public class Sample5Activity extends BaseActivity {
             @Override
             public void run() {
                 morphToSquare(button, integer(R.integer.mb_animation));
+                button.stopIndeterminateProgress();
                 button.unblockTouch();
             }
         }, 4000);

@@ -21,7 +21,7 @@ public class Sample2Activity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_sample_morph);
 
-        final MorphingButton btnMorph1 = (MorphingButton) findViewById(R.id.btnMorph1);
+        final MorphingButton btnMorph1 = findViewById(R.id.btnMorph1);
         btnMorph1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,7 +29,7 @@ public class Sample2Activity extends BaseActivity {
             }
         });
 
-        final MorphingButton btnMorph2 = (MorphingButton) findViewById(R.id.btnMorph2);
+        final MorphingButton btnMorph2 = findViewById(R.id.btnMorph2);
         btnMorph2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

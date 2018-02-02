@@ -1,28 +1,27 @@
 package com.dd.morphingbutton.impl;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
+
 import com.dd.morphingbutton.MorphingAnimation;
 import com.dd.morphingbutton.MorphingButton;
 import com.dd.morphingbutton.R;
 
 public class IndeterminateProgressButton extends MorphingButton {
 
-    private int mColor1;
-    private int mColor2;
-    private int mColor3;
-    private int mColor4;
+    private int[] mColors;
     private int mProgressCornerRadius;
     private ProgressBar mProgressBar;
 
@@ -44,11 +43,7 @@ public class IndeterminateProgressButton extends MorphingButton {
     }
 
     private void init(Context context) {
-        Resources res = context.getResources();
-        mColor1 = res.getColor(R.color.mb_gray);
-        mColor2 = res.getColor(R.color.mb_blue);
-        mColor3 = res.getColor(R.color.mb_gray);
-        mColor4 = res.getColor(R.color.mb_blue);
+        mColors = new int[]{ContextCompat.getColor(context, R.color.mb_gray), ContextCompat.getColor(context, R.color.mb_blue)};
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             // clipPath only available on hardware for 18+
@@ -64,7 +59,7 @@ public class IndeterminateProgressButton extends MorphingButton {
             if (mProgressBar == null) {
                 mProgressBar = new ProgressBar(this);
                 setupProgressBarBounds();
-                mProgressBar.setColorScheme(mColor1, mColor2, mColor3, mColor4);
+                mProgressBar.setColorScheme(mColors);
                 mProgressBar.start();
             }
             mProgressBar.draw(canvas);
@@ -78,24 +73,9 @@ public class IndeterminateProgressButton extends MorphingButton {
     }
 
     public void morphToProgress(int backgroundColor, int progressCornerRadius, int width, int height, int duration,
-                                int progressColor1) {
-        morphToProgress(backgroundColor, progressCornerRadius, width, height, duration, backgroundColor, progressColor1,
-                backgroundColor, progressColor1);
-    }
-
-    public void morphToProgress(int backgroundColor, int progressCornerRadius, int width, int height, int duration,
-                                int progressColor1, int progressColor2) {
-        morphToProgress(backgroundColor, progressCornerRadius, width, height, duration, progressColor1, progressColor2,
-                progressColor1, progressColor2);
-    }
-
-    public void morphToProgress(int backgroundColor, int progressCornerRadius, int width, int height, int duration,
-                                int progressColor1, int progressColor2, int progressColor3, int progressColor4) {
+                                @NonNull @ColorInt int... colors) {
         mProgressCornerRadius = progressCornerRadius;
-        mColor1 = progressColor1;
-        mColor2 = progressColor2;
-        mColor3 = progressColor3;
-        mColor4 = progressColor4;
+        mColors = colors;
 
         Params longRoundedSquare = Params.create()
                 .duration(duration)
@@ -145,21 +125,15 @@ public class IndeterminateProgressButton extends MorphingButton {
         private boolean mRunning;
 
         // Colors used when rendering the animation,
-        private int mColor1;
-        private int mColor2;
-        private int mColor3;
-        private int mColor4;
+        private int[] mColors;
         private int mCornerRadius;
         private View mParent;
 
         private RectF mBounds = new RectF();
 
-        public ProgressBar(View parent) {
+        private ProgressBar(View parent) {
             mParent = parent;
-            mColor1 = COLOR1;
-            mColor2 = COLOR2;
-            mColor3 = COLOR3;
-            mColor4 = COLOR4;
+            mColors = new int[]{COLOR1, COLOR2, COLOR3, COLOR4};
         }
 
         /**
@@ -167,16 +141,10 @@ public class IndeterminateProgressButton extends MorphingButton {
          * also be the color of the bar that grows in response to a user swipe
          * gesture.
          *
-         * @param color1 Integer representation of a color.
-         * @param color2 Integer representation of a color.
-         * @param color3 Integer representation of a color.
-         * @param color4 Integer representation of a color.
+         * @param colors Integer representation of a color.
          */
-        void setColorScheme(int color1, int color2, int color3, int color4) {
-            mColor1 = color1;
-            mColor2 = color2;
-            mColor3 = color3;
-            mColor4 = color4;
+        void setColorScheme(@NonNull @ColorInt int... colors) {
+            mColors = colors;
         }
 
         /**
@@ -238,16 +206,16 @@ public class IndeterminateProgressButton extends MorphingButton {
 
                 // First fill in with the last color that would have finished drawing.
                 if (iterations == 0) {
-                    canvas.drawColor(mColor1);
+                    canvas.drawColor(mColors[0]);
                 } else {
                     if (rawProgress >= 0 && rawProgress < 25) {
-                        canvas.drawColor(mColor4);
+                        canvas.drawColor(mColors[3 % mColors.length]);
                     } else if (rawProgress >= 25 && rawProgress < 50) {
-                        canvas.drawColor(mColor1);
+                        canvas.drawColor(mColors[0]);
                     } else if (rawProgress >= 50 && rawProgress < 75) {
-                        canvas.drawColor(mColor2);
+                        canvas.drawColor(mColors[1 % mColors.length]);
                     } else {
-                        canvas.drawColor(mColor3);
+                        canvas.drawColor(mColors[2 % mColors.length]);
                     }
                 }
 
@@ -259,23 +227,23 @@ public class IndeterminateProgressButton extends MorphingButton {
                 // progress 75 (wrap to 25) draw mColor1
                 if ((rawProgress >= 0 && rawProgress <= 25)) {
                     float pct = (((rawProgress + 25) * 2) / 100f);
-                    drawCircle(canvas, cx, cy, mColor1, pct);
+                    drawCircle(canvas, cx, cy, mColors[0], pct);
                 }
                 if (rawProgress >= 0 && rawProgress <= 50) {
                     float pct = ((rawProgress * 2) / 100f);
-                    drawCircle(canvas, cx, cy, mColor2, pct);
+                    drawCircle(canvas, cx, cy, mColors[1 % mColors.length], pct);
                 }
                 if (rawProgress >= 25 && rawProgress <= 75) {
                     float pct = (((rawProgress - 25) * 2) / 100f);
-                    drawCircle(canvas, cx, cy, mColor3, pct);
+                    drawCircle(canvas, cx, cy, mColors[2 % mColors.length], pct);
                 }
                 if (rawProgress >= 50 && rawProgress <= 100) {
                     float pct = (((rawProgress - 50) * 2) / 100f);
-                    drawCircle(canvas, cx, cy, mColor4, pct);
+                    drawCircle(canvas, cx, cy, mColors[3 % mColors.length], pct);
                 }
                 if ((rawProgress >= 75 && rawProgress <= 100)) {
                     float pct = (((rawProgress - 75) * 2) / 100f);
-                    drawCircle(canvas, cx, cy, mColor1, pct);
+                    drawCircle(canvas, cx, cy, mColors[0], pct);
                 }
                 if (mTriggerPercentage > 0 && drawTriggerWhileFinishing) {
                     // There is some portion of trigger to draw. Restore the canvas,
@@ -299,7 +267,7 @@ public class IndeterminateProgressButton extends MorphingButton {
         }
 
         private void drawTrigger(Canvas canvas, int cx, int cy) {
-            mPaint.setColor(mColor1);
+            mPaint.setColor(mColors[0]);
             canvas.drawCircle(cx, cy, cx * mTriggerPercentage, mPaint);
         }
 

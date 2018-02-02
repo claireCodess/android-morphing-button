@@ -3,8 +3,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
+              android:clipChildren="false"
+              android:clipToPadding="false"
               android:gravity="center"
-              tools:context="${relativePackage}.${activityClass}">
+              tools:context=".Sample1Activity">
 
     <com.dd.morphingbutton.MorphingButton
             android:id="@+id/btnMorph1"

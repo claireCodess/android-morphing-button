@@ -9,14 +9,14 @@ import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.StateSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-public class MorphingButton extends Button {
+public class MorphingButton extends AppCompatButton {
 
     private Padding mPadding;
     private int mHeight;
@@ -220,10 +220,10 @@ public class MorphingButton extends Button {
     }
 
     private class Padding {
-        public int left;
-        public int right;
-        public int top;
-        public int bottom;
+        int left;
+        int right;
+        int top;
+        int bottom;
     }
 
     public static class Params {
