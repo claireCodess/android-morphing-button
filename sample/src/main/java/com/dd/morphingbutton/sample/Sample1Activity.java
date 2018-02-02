@@ -81,7 +81,7 @@ public class Sample1Activity extends BaseActivity {
                 .height(dimen(R.dimen.mb_height_56))
                 .color(color(R.color.mb_green))
                 .colorPressed(color(R.color.mb_green_dark))
-                .icon(R.drawable.ic_done);
+                .icon(R.drawable.ic_done_white_24dp);
         btnMorph.morph(circle);
     }
 
@@ -93,7 +93,7 @@ public class Sample1Activity extends BaseActivity {
                 .height(dimen(R.dimen.mb_height_56))
                 .color(color(R.color.mb_red))
                 .colorPressed(color(R.color.mb_red_dark))
-                .icon(R.drawable.ic_lock);
+                .icon(R.drawable.ic_lock_white_24dp);
         btnMorph.morph(circle);
     }
 
